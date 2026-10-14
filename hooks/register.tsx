@@ -77,6 +77,13 @@ function local(ms: number, offsetSec: number): Date {
   return new Date(ms + offsetSec * 1000)
 }
 
+// Time left before the prompt cache goes cold, e.g. "42m"; empty when there is no cached turn yet.
+function cacheLeft(c: Cache, nowMs: number): string {
+  if (c.lastTs === null) return ''
+  const minutes = Math.ceil((CACHE_TTL_S - (nowMs / 1000 - c.lastTs)) / 60)
+  return minutes < 1 ? '<1m' : `${minutes}m`
+}
+
 function cacheExpired(c: Cache, nowMs: number): boolean {
   return c.lastTs !== null && nowMs / 1000 - c.lastTs > CACHE_TTL_S
 }
@@ -282,7 +289,7 @@ export const register: Register = on => {
             {usage === null ? null : <Svg source={badgeSvg('hourglass')} width={16} height={16} alt="What a cache miss would cost" />}
             {usage === null ? null : expired
               ? <Text color="#d4a72c">Cache expired · next {missCost(usage.cache)}</Text>
-              : <Text dimColor>Cache miss {v(missCost(usage.cache))}</Text>}
+              : <Text dimColor>Cache miss {v(missCost(usage.cache))}{usage.cache.lastTs === null ? '' : ` · ${cacheLeft(usage.cache, nowMs)} left`}</Text>}
             {canCompact ? <Button key="compact" label="/compact" onPress={() => compact($, st)} /> : null}
             {st.compacting ? <Text dimColor>compacting…</Text> : null}
           </Box>

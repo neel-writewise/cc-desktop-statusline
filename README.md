@@ -16,7 +16,7 @@ one row there.
 | **$664.77 of $2,000.00 · 33%** | Monthly spend against your account's spend limit. Shows `-` when the account has no spend limit or the usage endpoint refuses. |
 | **Sess 46%** | How full this conversation's context window is. |
 | **$15.2 (+$0.21)** | API-equivalent cost of this session so far, and of the last turn. |
-| **Cache miss $3.71** | What re-caching this conversation would cost if the prompt cache expired: the cache write alone, at the 1-hour rate. A long conversation makes it grow; compacting brings it down. After an hour idle it turns yellow as **Cache expired · next $3.71**. Right after a compaction it shows `-` until the next response. |
+| **Cache miss $3.71 · 42m left** | The time left before the cache expires, and what re-caching this conversation would cost if the prompt cache expired: the cache write alone, at the 1-hour rate. A long conversation makes it grow; compacting brings it down. After an hour idle it turns yellow as **Cache expired · next $3.71**. Right after a compaction it shows `-` until the next response. |
 | **/compact** | Runs Claude Code's `/compact`. Shown between turns. |
 
 The rings turn yellow at 50% and red at 80%. In the terminal a shorter version is drawn as one
