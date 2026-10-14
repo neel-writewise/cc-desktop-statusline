@@ -1,0 +1,19 @@
+hooks/register.tsx
+  s_6185ab259745f1::t_89dd61f2e4dcce 1-2,4-5,10,26-28,103,145-146,154-183,185,226,232,257,267,270-271,273,296
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6204e93866a9277f6a3372f154acca4e11dd33aa",
+  "prompts": {},
+  "sessions": {
+    "s_6185ab259745f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fec4f47b-c1a7-4527-b954-aecd407d9854",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Neel Patel <neel@writewise.com>"
+    }
+  }
+}
