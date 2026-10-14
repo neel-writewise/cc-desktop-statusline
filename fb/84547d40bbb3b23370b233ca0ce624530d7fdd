@@ -1,0 +1,63 @@
+.claude-plugin/marketplace.json
+  s_6185ab259745f1::t_105f02b0d59861 1-25
+.claude-plugin/plugin.json
+  s_6185ab259745f1::t_cf333cb6536232 1-12
+.gitignore
+  s_6185ab259745f1::t_96c364859837f5 1-4
+LICENSE
+  s_6185ab259745f1::t_38b709817ae7b6 1-21
+README.md
+  s_6185ab259745f1::t_0be564e1c4e18f 1-135
+hooks/hooks.json
+  s_6185ab259745f1::t_91e9f08aaca9a7 1
+hooks/register.tsx
+  s_6185ab259745f1::t_467b1b75ac0b82 1-313
+plugins/pixel-pet-dog/.claude-plugin/plugin.json
+  s_6185ab259745f1::t_fef36b59f5e0a4 1-13
+plugins/pixel-pet-dog/README.md
+  s_6185ab259745f1::t_7077ce7f944009 1-25
+plugins/pixel-pet-dog/hooks/dog.ts
+  s_6185ab259745f1::t_b07ba71471681a 1-143
+plugins/pixel-pet-dog/hooks/hooks.json
+  s_6185ab259745f1::t_45d2fbbc37ea5f 1
+plugins/pixel-pet-dog/hooks/register.ts
+  s_6185ab259745f1::t_fa98970858aa33 1-15
+plugins/pixel-pet/.claude-plugin/plugin.json
+  s_6185ab259745f1::t_3b0003265d4579 1-16
+plugins/pixel-pet/README.md
+  s_6185ab259745f1::t_d2aea23ff85286 1-268
+plugins/pixel-pet/hooks/hooks.json
+  s_6185ab259745f1::t_ebe4440e1c9287 1
+plugins/pixel-pet/hooks/pet-kit.ts
+  s_6185ab259745f1::t_55d5fd230b3e1e 1-377
+plugins/pixel-pet/hooks/pet.test.tsx
+  s_6185ab259745f1::t_99a33f8249a83b 1-608
+plugins/pixel-pet/hooks/pets/cat.ts
+  s_6185ab259745f1::t_70ddda4193a259 1-340
+plugins/pixel-pet/hooks/register.tsx
+  s_6185ab259745f1::t_7dd200b70d3b05 1-1271
+plugins/pixel-pet/hooks/sprite.ts
+  s_6185ab259745f1::t_15a4b5c53ea5a4 1-74
+plugins/pixel-pet/scripts/usage.py
+  s_6185ab259745f1::t_b4536d432ab2b6 1-254
+plugins/pixel-pet/types/index.d.ts
+  s_6185ab259745f1::t_b2ea64d61a18e0 1-111
+scripts/usage.py
+  s_6185ab259745f1::t_2f7fa889c2fd69 1-212
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fb84547d40bbb3b23370b233ca0ce624530d7fdd",
+  "prompts": {},
+  "sessions": {
+    "s_6185ab259745f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fec4f47b-c1a7-4527-b954-aecd407d9854",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Neel Patel <neel@writewise.com>"
+    }
+  }
+}
