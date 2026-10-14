@@ -1,0 +1,19 @@
+hooks/register.tsx
+  s_6185ab259745f1::t_2859e561855611 293
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6c2df2468195c7b43b351e4556446a7a7db2e858",
+  "prompts": {},
+  "sessions": {
+    "s_6185ab259745f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fec4f47b-c1a7-4527-b954-aecd407d9854",
+        "model": "unknown"
+      },
+      "human_author": "Neel Patel <neel@writewise.com>"
+    }
+  }
+}
