@@ -1,0 +1,135 @@
+# cc-desktop-statusline
+
+A status band above the prompt in the Claude Code desktop app, built as a Claude Code
+mod (a plugin of function hooks).
+
+![The band above the prompt in the Claude Code desktop app](docs/screenshot.png)
+
+In the terminal, Claude Code's `statusLine` setting covers this. The desktop app has no status
+line, but mods can draw above its prompt, so this plugin puts the numbers you keep checking in
+one row there.
+
+## What it shows
+
+| Item | Meaning |
+|---|---|
+| **$664.77 of $2,000.00 · 33%** | Monthly spend against your account's spend limit. Shows `-` when the account has no spend limit or the usage endpoint refuses. |
+| **Sess 46%** | How full this conversation's context window is. |
+| **$15.2 (+$0.21)** | API-equivalent cost of this session so far, and of the last turn. |
+| **Cache miss $3.71** | What re-caching this conversation would cost if the prompt cache expired: the cache write alone, at the 1-hour rate. A long conversation makes it grow; compacting brings it down. After an hour idle it turns yellow as **Cache expired · next $3.71**. Right after a compaction it shows `-` until the next response. |
+| **/compact** | Runs Claude Code's `/compact`. Shown between turns. |
+
+The rings turn yellow at 50% and red at 80%. In the terminal a shorter version is drawn as one
+line of text (not yet tested there).
+
+## Install
+
+```bash
+claude plugin marketplace add GoatEatAny/cc-desktop-statusline
+claude plugin install cc-desktop-statusline@cc-desktop-statusline
+```
+
+Start a new session and the band appears above the prompt.
+
+To remove it:
+
+```bash
+claude plugin uninstall cc-desktop-statusline@cc-desktop-statusline
+claude plugin marketplace remove cc-desktop-statusline
+```
+
+## Pixel pet (optional)
+
+<img alt="A herd of pixel-art cats running in the band above the prompt in the Claude Code desktop app" src="docs/pixel-pet.gif">
+
+[pixel-pet](plugins/pixel-pet) is a second mod in this marketplace. It puts a herd of pixel-art
+pets in the same band, and they react to your session:
+
+- They cheer when a turn ends, and nap when left alone.
+- They grow rounder as the context window fills.
+- They sleep under a futon once the prompt cache has gone cold.
+- A beckoning figurine beside the bar offers `/compact` (or `/clear`), and after a compaction
+  the pets eat a reward.
+
+The band still opens on the status band. The ◒ / ◓ switch at its right end turns to the pets
+and back, and the choice is kept for later sessions. The pets' words are in Japanese.
+
+What they do and when, in full, is in [What the pets do](plugins/pixel-pet/README.md#what-the-pets-do).
+
+### Install the pets
+
+pixel-pet uses the status band as its other view, so installing it brings the status band too.
+
+```bash
+claude plugin install pixel-pet@cc-desktop-statusline
+```
+
+A cat comes built in. A dog comes as a separate pet pack:
+
+```bash
+claude plugin install pixel-pet-dog@cc-desktop-statusline
+```
+
+Start a new session. Type `/pet` to list the pets, and `/pet dog` (or `/pet cat`) to choose one.
+Your choice is kept for later sessions.
+
+### Make your own pet
+
+You can draw a pet of your own and add it to the band. A pet is data, not code: a handful of
+pixel-art drawings and a few words. pixel-pet does all the moving (running, leaping, rolling,
+sleeping, eating), so a new animal is one file of drawings and a hook of three lines.
+
+1. Copy [pixel-pet-dog](plugins/pixel-pet-dog) to a folder of your own, for example `~/my-pet`.
+2. Rename the plugin, and give the pet an id such as `shiba`.
+3. Redraw the art in `hooks/dog.ts`. To start, you can keep the dog and change only its colors.
+4. Load the folder into Claude Code and type `/pet shiba`.
+
+The full walkthrough, with the letters to draw with and the checks a pet must pass, is in
+[Making your own pet](plugins/pixel-pet/README.md#making-your-own-pet).
+
+## Requirements
+
+- **Claude Code with mod support.** Tested with the desktop app on Claude Code 2.1.286.
+  Mods are new and their API may change.
+- **python3** 3.8 or later on your `PATH` (standard library only). On macOS, install the Command
+  Line Tools with `xcode-select --install` if you don't have it. Without python3 the band shows
+  the spend and the context instead of the session costs.
+- **macOS or Linux.** Windows is not supported yet.
+- **A Claude account with a monthly spend limit** for the spend figure. With an API key Claude Code reports no plan
+  limits, so those show `-`.
+
+## How the numbers are computed
+
+- **Costs are API-equivalent estimates, not your bill.** On a Claude subscription you pay the
+  plan price; this shows what the same tokens would cost on the API. Each response's input,
+  output, cache-write (5-minute at 1.25x input, 1-hour at 2x) and cache-read tokens are priced
+  from a table in [`scripts/usage.py`](scripts/usage.py) (`PRICES_AS_OF`); fast-mode responses
+  count double. A model the table does not list, including a newer point release, is marked `?`
+  instead of being guessed.
+- **Only local transcripts are counted.** The script reads the JSONL files Claude Code writes
+  under `~/.claude/projects` (or `$CLAUDE_CONFIG_DIR/projects`). Cloud sessions and claude.ai
+  chats are not on your machine, so they are not included. The 5h / 7d percentages come from
+  Claude Code itself and do cover all your usage.
+- **The last turn** is everything after the last message you typed that got an answer in this
+  session, subagents included.
+- **The cache miss** assumes the one-hour cache Claude Code uses on a subscription within its
+  usage limits, so it is priced at the 1-hour write rate and turns into **Cache expired** after
+  an hour. With a shorter cache (for example on an API key, where it lasts 5 minutes) it
+  overstates the cost and turns yellow later than it should.
+- **Dates** use your machine's local time zone.
+
+Parsed transcripts are cached in `$XDG_CACHE_HOME/cc-desktop-statusline/` (default
+`~/.cache/cc-desktop-statusline/`), so each refresh only re-reads files that changed. The band
+refreshes when a turn ends, and at midnight.
+
+## Privacy and cost
+
+- One network request: the spend figure is read from Anthropic's account usage endpoint with your own Claude login, at most once every 5 minutes. Nothing else leaves your machine.
+- The band itself makes no model calls and uses no tokens. The /compact button runs Claude
+  Code's normal `/compact`, which does.
+- It reads your local transcripts to count tokens. The cache holds file paths, timestamps,
+  message ids and token counts, never message text.
+
+## License
+
+MIT. Not affiliated with or endorsed by Anthropic.

@@ -1,0 +1,25 @@
+{
+  "name": "cc-desktop-statusline",
+  "description": "A status band above the Claude Code prompt: usage, limits, cost and activity.",
+  "owner": {
+    "name": "GoatEatAny",
+    "url": "https://github.com/GoatEatAny"
+  },
+  "plugins": [
+    {
+      "name": "cc-desktop-statusline",
+      "source": "./",
+      "description": "A status band above the Claude Code prompt with monthly spend against its limit, context use and session cost."
+    },
+    {
+      "name": "pixel-pet",
+      "source": "./plugins/pixel-pet",
+      "description": "A herd of pixel-art pets in the band above the prompt that react to your session: they cheer after a turn, grow rounder as the context fills, nap under a futon once the prompt cache goes cold, and a beckoning figurine offers /compact. The band opens on the status band; a switch turns to the pets."
+    },
+    {
+      "name": "pixel-pet-dog",
+      "source": "./plugins/pixel-pet-dog",
+      "description": "A pet pack for pixel-pet: a floppy-eared puppy (/pet dog). Also the example to copy for a pack of your own."
+    }
+  ]
+}

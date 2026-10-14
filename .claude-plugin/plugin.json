@@ -1,0 +1,12 @@
+{
+  "name": "cc-desktop-statusline",
+  "displayName": "CC Desktop Statusline",
+  "version": "0.1.0",
+  "description": "A status band above the Claude Code prompt: monthly spend against its limit, context use, session and last-turn cost, what a cache miss would cost, and a /compact button.",
+  "author": {
+    "name": "GoatEatAny",
+    "url": "https://github.com/GoatEatAny"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/GoatEatAny/cc-desktop-statusline"
+}
