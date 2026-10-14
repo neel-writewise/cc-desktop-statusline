@@ -290,7 +290,7 @@ export const register: Register = on => {
             {usage === null ? null : expired
               ? <Text color="#d4a72c">Cache expired · next {missCost(usage.cache)}</Text>
               : <Text dimColor>Cache miss {v(missCost(usage.cache))}{usage.cache.lastTs === null ? '' : ` · ${cacheLeft(usage.cache, nowMs)} left`}</Text>}
-            {canCompact ? <Button key="compact" label="/compact" onPress={() => compact($, st)} /> : null}
+            {canCompact ? <Button key="compact" variant="secondary" onPress={() => compact($, st)}><Text dimColor>⤓</Text> Compact</Button> : null}
             {st.compacting ? <Text dimColor>compacting…</Text> : null}
           </Box>
         </Box>
