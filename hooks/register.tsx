@@ -272,7 +272,8 @@ export const register: Register = on => {
       const v = (x: string) => <Text bold dimColor={false}>{x}</Text>
       return (
         // Widest scope first: monthly spend, then this session ending in its action.
-        <Box flexDirection="row" alignItems="center" flexWrap="wrap" columnGap={3}>
+        <Box flexDirection="row" alignItems="center" columnGap={3}>
+         <Box flexDirection="row" alignItems="center" flexWrap="wrap" flexGrow={1} flexShrink={1} columnGap={3} rowGap={1}>
           <Box flexDirection="row" alignItems="center" columnGap={1}>
             <Svg source={badgeSvg('dollar')} width={16} height={16} alt="Monthly spend against the limit" />
             <Text dimColor>{v(st.spend ?? dash)}</Text>
@@ -290,9 +291,12 @@ export const register: Register = on => {
             {usage === null ? null : expired
               ? <Text color="#d4a72c">Cache expired · next {missCost(usage.cache)}</Text>
               : <Text dimColor>Cache miss {v(missCost(usage.cache))}{usage.cache.lastTs === null ? '' : ` · ${cacheLeft(usage.cache, nowMs)} left`}</Text>}
-            {canCompact ? <Button key="compact" variant="secondary" onPress={() => compact($, st)}><Text dimColor>⤓</Text> Compact</Button> : null}
-            {st.compacting ? <Text dimColor>compacting…</Text> : null}
           </Box>
+         </Box>
+         <Box flexShrink={0} alignItems="center">
+          {canCompact ? <Button key="compact" variant="secondary" onPress={() => compact($, st)}><Text dimColor>⤓</Text> Compact</Button> : null}
+          {st.compacting ? <Text dimColor>compacting…</Text> : null}
+         </Box>
         </Box>
       )
     }
